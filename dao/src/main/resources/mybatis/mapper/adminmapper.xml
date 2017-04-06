@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icelee.dao.impl.AdminImpl">
+
+    <insert id="save" parameterType="admin">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            select @@IDENTITY as id
+        </selectKey>
+        INSERT INTO
+        t_admin
+        (username,password,realname,sex,mobile,createTime,updateTime,createBy)
+        VALUES (
+        #{username},#{password},#{realname},#{sex},#{mobile},#{createTime},#{updateTime},#{createBy}
+        )
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE from t_admin where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="admin">
+      UPDATE
+        t_admin
+      SET
+        username=#{username},
+        password=#{password},
+        realname=#{realname},
+        sex=#{sex},
+        mobile=#{mobile},
+        email=#{email},
+        updateTime=#{updateTime},
+        createBy=#{createBy}
+      WHERE
+        id=#{id}
+    </update>
+
+    <select id="findById" parameterType="long" resultType="admin">
+      SELECT * FROM t_admin WHERE id=#{long}
+    </select>
+    <select id="findAll" resultType="admin">
+      SELECT * FROM t_admin
+    </select>
+    <select id="getCount" resultType="long">
+      SELECT count(*) FROM t_admin
+    </select>
+
+    <select id="findByUsernameAndPassword" resultType="admin" parameterType="adminQueryWrapper">
+      SELECT * FROM t_admin WHERE username = #{username} and password = #{password};
+    </select>
+
+
+</mapper>
