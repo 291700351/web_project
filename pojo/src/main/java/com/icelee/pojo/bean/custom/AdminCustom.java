@@ -1,7 +1,6 @@
-package com.icelee.service;
+package com.icelee.pojo.bean.custom;
 
 import com.icelee.pojo.bean.Admin;
-import org.springframework.stereotype.Service;
 
 /**
  * ============================================================
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
  * <p>
  * ============================================================
  **/
-@Service
-public interface AdminService {
+public class AdminCustom extends Admin {
 
-    public Admin login(String username, String password);
 }

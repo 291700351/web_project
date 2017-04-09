@@ -3,4 +3,5 @@ include 'dao'
 include 'utils'
 include 'pojo'
 include 'service'
+include 'web'
 

@@ -1,5 +1,7 @@
 package com.icelee.pojo.wrapper;
 
+import com.icelee.pojo.bean.custom.AdminCustom;
+
 /**
  * ============================================================
  * <p>
@@ -17,37 +19,21 @@ package com.icelee.pojo.wrapper;
  **/
 public class AdminQueryWrapper {
 
-    private String username;
-
-    private String password;
+    private AdminCustom adminCustom;
 
 
-    //===Desc:====================================================================================
-
-
-    public String getUsername() {
-        return username;
+    public AdminCustom getAdminCustom() {
+        return adminCustom;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAdminCustom(AdminCustom adminCustom) {
+        this.adminCustom = adminCustom;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    //===Desc:====================================================================================
 
     @Override
     public String toString() {
         return "AdminQueryWrapper{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                "adminCustom=" + adminCustom +
                 '}';
     }
 }

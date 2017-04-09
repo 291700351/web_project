@@ -1,0 +1,61 @@
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+//添加tomcat插件
+apply plugin: 'com.bmuschko.tomcat'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
+dependencies {
+    compile(
+//            'commons-logging:commons-logging:1.2',
+//            'org.springframework:spring-aop:4.2.4.RELEASE',
+//            'org.springframework:spring-beans:4.2.4.RELEASE',
+//            'org.springframework:spring-context:4.2.4.RELEASE',
+//            'org.springframework:spring-core:4.2.4.RELEASE',
+//            'org.springframework:spring-expression:4.2.4.RELEASE',
+            'org.springframework:spring-web:4.2.4.RELEASE',
+            'org.springframework:spring-webmvc:4.2.4.RELEASE'
+    )
+
+    compile project(':service')
+    //servlet依赖
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'javax.servlet:jstl:1.2'
+    runtime("jstl:jstl:1.2")
+
+
+    def tomcatVersion = '7.0.76'// '8.5.12'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
+}
+
+//tomcat配置
+tomcat {
+    httpPort = 8080
+    httpsPort = 8091
+    enableSSL = true
+    contextPath = '/'//manager
+
+    users {
+//        user {
+//            username = 'user1'
+//            password = '123456'
+//            roles = ['developers', 'admin']
+//        }
+//
+//        user {
+//            username = 'user2'
+//            password = 'abcdef'
+//            roles = ['manager']
+//        }
+    }
+}

@@ -1,11 +1,18 @@
 package com.icelee.dao.impl;
 
+import com.icelee.dao.dao.AdminDao;
 import com.icelee.pojo.bean.Admin;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +31,7 @@ import java.util.List;
  * <p>
  * ============================================================
  **/
-public class AdminImplTest {
+public class AdminDaoTest {
     private ApplicationContext context;
 
 
@@ -57,7 +64,7 @@ public class AdminImplTest {
         admin.setCreateTime(createTime);
         admin.setUpdateTime(updateTime);
         admin.setCreateBy(createBy);
-        AdminImpl impl = context.getBean(AdminImpl.class);
+        AdminDao impl = context.getBean(AdminDao.class);
         impl.save(admin);
         System.out.println(admin.getId());
         System.out.println(admin);
@@ -67,13 +74,13 @@ public class AdminImplTest {
 
     @Test
     public void deleteById() {
-        context.getBean(AdminImpl.class).deleteById(3);
+        context.getBean(AdminDao.class).deleteById(3);
 
     }
 
     @Test
     public void update() {
-        Admin admin = context.getBean(AdminImpl.class).findById(4);
+        Admin admin = context.getBean(AdminDao.class).findById(4);
 
         admin.setUsername(username);
         admin.setPassword(password);
@@ -84,33 +91,46 @@ public class AdminImplTest {
         admin.setUpdateTime(updateTime);
         admin.setCreateBy(createBy);
 //
-        context.getBean(AdminImpl.class).update(admin);
+        context.getBean(AdminDao.class).update(admin);
     }
 
     @Test
     public void findById() {
-        Admin admin = context.getBean(AdminImpl.class).findById(4);
+        Admin admin = context.getBean(AdminDao.class).findById(4);
         System.out.println(admin);
     }
 
 
     @Test
     public void findAll() {
-        List<Admin> all = context.getBean(AdminImpl.class).findAll();
+        List<Admin> all = context.getBean(AdminDao.class).findAll();
         System.out.println(all);
     }
 
     @Test
-    public void getCount() {
-        long count = context.getBean(AdminImpl.class).getCount();
+    public void getCount() throws IOException {
+        SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) context.getBean("sqlSessionFactory");
+
+        long count = sqlSessionFactory.openSession().getMapper(AdminDao.class).getCount();
+//        = sqlSessionFactory.openSession().getMapper(AdminDao.class).getCount();
         System.out.println(count);
+//        SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) context.getBean("sqlSessionFactory");
+//        Reader reader = Resources.getResourceAsReader("mybatis/mybatis-config.xml");
+//        //获取SqlSessionFactory
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+//        System.out.println(sqlSessionFactory);
+//        SqlSession session = sqlSessionFactory.openSession();
+//        System.out.println(session);
+//
+//        AdminDao mapper = session.getMapper(AdminDao.class);
+//        System.out.println(mapper.getCount());
 
     }
 
     @Test
     public void findByUsernameAndPassword() {
-        Admin admin = context.getBean(AdminImpl.class).findByUsernameAndPassword(username, password);
-        System.out.println(admin);
+//        Admin admin = context.getBean(AdminDao.class).findByUsernameAndPassword(username, password);
+//        System.out.println(admin);
 
     }
 }

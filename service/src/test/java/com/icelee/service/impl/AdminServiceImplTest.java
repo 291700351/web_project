@@ -37,9 +37,10 @@ public class AdminServiceImplTest {
         String username = "IceLee";
         String password = "99233123";
 
-        Admin admin = context.getBean(AdminServiceImpl.class).login(username, password);
-        System.out.println(admin);
+//        Admin admin = context.getBean(AdminServiceImpl.class).login(username, password);
+//        System.out.println(admin);
 
+        System.out.println(context.getBean(AdminServiceImpl.class).login(username, password));
     }
 
 }

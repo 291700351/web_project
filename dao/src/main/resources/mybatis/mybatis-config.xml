@@ -3,12 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--<properties resource="jdbc.properties"/>-->
     <!--将pojo定义别名-->
     <typeAliases>
         <package name="com.icelee.pojo"/>
     </typeAliases>
+    <!--<environments default="development">-->
+        <!--<environment id="development">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="${jdbc.driver}"/>-->
+                <!--<property name="url" value="${jdbc.url}"/>-->
+                <!--<property name="username" value="${jdbc.username}"/>-->
+                <!--<property name="password" value="${jdbc.password}"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
     <!--映射文件-->
     <!--<mappers>-->
-        <!--<mapper resource="mybatis/mapper/usermapper.xml"/>-->
+    <!--<mapper resource="mybatis/mapper/usermapper.xml"/>-->
+    <!--</mappers>-->
+    <!--<mappers>-->
+        <!--&lt;!&ndash;<mapper resource="config_mybatis/mapper/User.xml"/>&ndash;&gt;-->
+        <!--<mapper class="com.icelee.dao.dao.AdminDao"/>-->
     <!--</mappers>-->
 </configuration>

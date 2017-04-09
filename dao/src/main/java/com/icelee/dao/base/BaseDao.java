@@ -1,5 +1,7 @@
 package com.icelee.dao.base;
 
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -36,6 +38,8 @@ public interface BaseDao<T> {
      */
     List<T> findAll();
 
-    /** 获取总数*/
+    /**
+     * 获取总数
+     */
     long getCount();
 }

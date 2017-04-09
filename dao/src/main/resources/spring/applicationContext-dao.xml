@@ -5,9 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <context:property-placeholder location="classpath:jdbc.properties"/>
     <!--spring自动包扫描-->
     <context:component-scan base-package="com.icelee.dao"/>
-    <context:property-placeholder location="classpath:jdbc.properties"/>
     <!--配置数据源，使用的是alibaba的Druid(德鲁伊)数据源 -->
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
@@ -47,19 +47,15 @@
         <property name="filters" value="mergeStat"/>
     </bean>
 
+    <!--自动扫描Mybatis映射文件Mapper.xml-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.icelee.dao.dao"/>
+    </bean>
+
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
         <!--自动扫描mybatis映射文件-->
-        <property name="mapperLocations">
-            <list>
-                <value>classpath:mybatis/mapper/*mapper.xml</value>
-            </list>
-        </property>
-
-    </bean>
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
 </beans>

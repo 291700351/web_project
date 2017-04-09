@@ -2,6 +2,8 @@ package com.icelee.dao.dao;
 
 import com.icelee.dao.base.BaseDao;
 import com.icelee.pojo.bean.Admin;
+import com.icelee.pojo.wrapper.AdminQueryWrapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * ============================================================
@@ -18,11 +20,12 @@ import com.icelee.pojo.bean.Admin;
  * <p>
  * ============================================================
  **/
+@Repository
 public interface AdminDao extends BaseDao<Admin> {
 
     /**
      * 通过用户名和密码获取数据库的数据
      */
-    Admin findByUsernameAndPassword(String username, String password);
+    Admin findByUsernameAndPassword(AdminQueryWrapper adminQueryWrapper);
 
 }
